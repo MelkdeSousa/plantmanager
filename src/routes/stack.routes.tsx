@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Confirmation from '../pages/Confirmation'
 import UserIdentification from '../pages/UserIdentification'
 import Welcome from '../pages/Welcome'
+import PlantSelect from '../pages/PlantSelect'
 
 import colors from '../../styles/colors'
 
@@ -23,6 +24,8 @@ const Routes = () => (
     <Stack.Screen name='UserIdentification' component={UserIdentification} />
 
     <Stack.Screen name='Confirmation' component={Confirmation} />
+
+    <Stack.Screen name='PlantSelect' component={PlantSelect} />
   </Stack.Navigator>
 )
 
