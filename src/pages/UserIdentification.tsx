@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -10,12 +11,21 @@ import {
   View,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import Button from '../components/Button'
 
 import colors from '../../styles/colors'
 import fonts from '../../styles/fonts'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+
+interface ConfirmationParams {
+  title: string
+  subtitle: string
+  buttonTitle: string
+  icon: 'smile' | 'hug'
+  nextScreen: string
+}
 
 const UserIdentification = () => {
   const [isFocused, setFocused] = useState(false)
@@ -24,7 +34,24 @@ const UserIdentification = () => {
 
   const navigation = useNavigation()
 
-  const handleToConfirmation = () => navigation.navigate('Confirmation')
+  const handleToConfirmation = async () => {
+    if (!name) return Alert.alert('Me diz como chamar você 😢')
+
+    try {
+      await AsyncStorage.setItem('@plantmanager:user', JSON.stringify(name))
+
+      navigation.navigate('Confirmation', {
+        title: 'Prontinho!',
+        buttonTitle: 'Começar',
+        icon: 'smile',
+        subtitle:
+          'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
+        nextScreen: 'PlantSelect',
+      } as ConfirmationParams)
+    } catch (err) {
+      Alert.alert('Não foi possível salvar seu nome de usuário. 😢')
+    }
+  }
 
   const handleInputFocus = () => {
     setFocused(true)

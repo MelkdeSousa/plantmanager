@@ -4,9 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Confirmation from '../pages/Confirmation'
 import UserIdentification from '../pages/UserIdentification'
 import Welcome from '../pages/Welcome'
-import PlantSelect from '../pages/PlantSelect'
+import PlantSave from '../pages/PlantSave'
+import MyPlants from '../pages/MyPlants'
 
 import colors from '../../styles/colors'
+import TabRoutes from './tab.routes'
 
 const Stack = createStackNavigator()
 
@@ -25,7 +27,11 @@ const Routes = () => (
 
     <Stack.Screen name='Confirmation' component={Confirmation} />
 
-    <Stack.Screen name='PlantSelect' component={PlantSelect} />
+    <Stack.Screen name='PlantSelect' component={TabRoutes} />
+
+    <Stack.Screen name='PlantSave' component={PlantSave} />
+
+    <Stack.Screen name='MyPlants' component={TabRoutes} />
   </Stack.Navigator>
 )
 
