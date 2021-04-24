@@ -1,5 +1,5 @@
 export interface Plant {
-  id: number
+  id: string
   name: string
   about: string
   water_tips: string
@@ -10,9 +10,6 @@ export interface Plant {
     repeat_every: string
   }
   dateTimeNotification: Date
-}
-
-export interface MyPlant extends Plant {
   hour: string
 }
 
@@ -24,5 +21,6 @@ export type Environment = {
 export type StoragePlant = {
   [id: string]: {
     data: Plant
+    notificationId: string
   }
 }
